@@ -148,7 +148,7 @@ public class calculator extends Application {
 
         // add the scene to the stage, then configure the stage and make it visible
         stage.setScene(scene);
-        stage.setTitle("Calculator V1");
+        stage.setTitle("Herrick Van Elmer B. Boquel - Calculator");
         stage.show();
     }
     
