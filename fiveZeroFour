@@ -1,0 +1,109 @@
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import java.util.Random;
+
+public class fiveZeroFour extends Application
+{
+
+   int randomNum; 
+   int guessCount;
+   @Override
+    public void start(Stage stage)
+   {
+    
+      
+      TextField pushMeTextField = new TextField();
+      pushMeTextField.setMaxWidth(250);
+        
+        // create and configure a label to display the output
+      Label pushMeLabel= new Label();
+      pushMeLabel.setTextFill(Color.RED);
+      pushMeLabel.setFont(Font.font("Arial", 20));
+      
+      Label hintLabel= new Label();
+      pushMeLabel.setTextFill(Color.BLACK);
+      pushMeLabel.setFont(Font.font("Arial", 15));
+      
+      Label guessLabel= new Label();
+      pushMeLabel.setTextFill(Color.BLACK);
+      pushMeLabel.setFont(Font.font("Arial", 15));
+        
+        // create and configure a button to push for conversion
+      Button pushMeButton = new Button();
+      pushMeButton.setText("Guess the number from 1-10!");
+      pushMeButton.setOnAction(
+         e -> {
+            String text = pushMeTextField.getText();
+            
+            
+                 
+            try {
+               double number1 = Double.parseDouble(text);
+            
+             if (number1 < 1 || number1 > 10) {
+                    pushMeLabel.setText("Invalid number! Please guess from 1-10.");
+                } else {
+                    guessCount++;
+                    if (number1 == randomNum) {
+                        pushMeLabel.setText("You entered: " + text + " and guessed correctly!");
+                    } else {
+                        if (number1 > randomNum) {
+                            hintLabel.setText("Try guessing lower :)");
+                        } else if (number1 < randomNum) {
+                            hintLabel.setText("Try guessing higher :)");
+                        }
+                        pushMeLabel.setText("Your guess of " + text + " is wrong!");
+                    }
+                    guessLabel.setText("Number of guesses: " + guessCount);
+                }
+            } catch (NumberFormatException ex) {
+                pushMeLabel.setText("Please enter valid numbers.");
+            }
+            
+           
+            
+         });
+        
+   
+       
+       
+              
+        // create and configure a VBox to hold our components       
+      VBox root = new VBox();
+      root.setSpacing(10);
+      root.setAlignment(Pos.CENTER);
+        
+   
+      root.getChildren().addAll(pushMeTextField, pushMeButton, pushMeLabel, hintLabel, guessLabel);
+       
+   
+       
+      Scene scene = new Scene(root, 450, 400);
+        
+      stage.setScene(scene);
+      stage.setTitle("Herrick Van Elmer B Boquel - 504");
+      stage.show();        
+      
+      randomNum = randomGenerator(1, 10);
+   }
+    
+   private int randomGenerator(int min, int max) {
+    
+      return (int) (Math.random() * (max - min + 1)) + min;
+             
+   }
+    
+   public static void main(String[] args)
+   {
+      launch(args);
+   }
+    
+}
